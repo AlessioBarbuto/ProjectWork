@@ -4,25 +4,25 @@
 <html>
 <head>
 
-<title>Home - Diario Alimentare</title> <!-- landing page, questa è la pagina di reindirazzamento -->
+<title>Home - Diario Alimentare</title> 
 
 </head>
 <body>
-<form action="LoginServlet">
-<img src="logo.png" height="100px" width="150px"
-		alt="impossibile caricare l'immagine">
+<form action="LoginServlet" method="post">
+<a href="http://localhost:8080/MyKcalCounter/Benvenuto">
+    <img src="logo.png" height="100px" width="150px"
+		alt="impossibile caricare l'immagine">  
+</a>
 
-<% String nome = request.getParameter("usnm");
-out.println("Benvenuto nel programma "+nome);%>
-
- <h1>ecco il tuo diario alimentare</h1>  
+<% out.println("Benvenuto nel programma "+request.getParameter("user"));%>
  <br>
-   <%= "Expression tag: Benvenuto "+ nome %>
+ 
    <p>Questo programma è pensato per tutti gli appassionati del<br>
-     fitness e lo scopo è quello di aiutarti a tenere conto<br>
-     delle <strong>calorie</strong> che consumi durante il giorno.</p>   
+     fitness e lo scopo è quello di aiutare a tenere conto<br>
+     delle <strong>calorie</strong> che si consumano durante la giornata.</p>   
+    <br>
    
-   <br>
+
    
 </form>
 

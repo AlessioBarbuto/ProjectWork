@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 		if(connessione.controllaCredenziali(insertUser, insertPass) == true) {
 			response.sendRedirect("Benvenuto.jsp");
 		} else {response.resetBuffer();
+		response.sendRedirect("Login.jsp");
 		}
 		
 	} catch (SQLException e) {

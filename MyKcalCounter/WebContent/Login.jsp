@@ -7,10 +7,11 @@
 <title>Accesso - Diario Alimentare</title>
 </head>
 <body>
-<img src="logo.png" height="100px" width="150px"
-		alt="impossibile caricare l'immagine">
 
-                    <h1>Benvenuto! Eseguire l'accesso o effettuare la registrazione!</h1>
+<img  src="logo.png" height="100px" width="150px"
+		 alt="impossibile caricare l'immagine">
+
+<h1>Benvenuto! Eseguire l'accesso o effettuare la registrazione!</h1>
 <form action="LoginServlet" method=post>
 <br>
 <br>
@@ -24,7 +25,7 @@
 <br>                             
 <input type="submit" value="Invia">
 <br>
-<a href="http://localhost:8080/MyJavaServerPages/Registrazione.jsp">Registrati</a>
+<a  href="http://localhost:8080/MyJavaServerPages/Registrazione.jsp">Registrati</a>
 </form>
 
 </body>

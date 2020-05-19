@@ -22,12 +22,12 @@
   <br>
   <fieldset><legend>Dati personali</legend>
   <label for="pesoAtt">Peso attuale:</label>
-  <input type="number" id="pesoAtt" name="pesoAtt">
+  <input type="number" step="0.01" min="0" max="120" id="pesoAtt" name="pesoAtt">
   
   <br>
   <br>
   <label for="obiettivo">Obiettivo:</label>
-  <input type="number" id="obiettivo" name="obiettivo">
+  <input type="number" step="0.01" min="40" max="120" id="obiettivo" name="obiettivo">
   
   <br>
   <br>

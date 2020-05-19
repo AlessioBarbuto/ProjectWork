@@ -22,8 +22,8 @@ public class RegistrationServlet extends HttpServlet {
 		//creo due variabili che immagazzinano il parametro in ingresso
 		String username = request.getParameter("usnm");
 		String password = request.getParameter("pssw");
-		Double pesoAttuale = Double.valueOf(request.getParameter("pesoAtt"));
-		Double obiettivo = Double.valueOf(request.getParameter("obiettivo"));
+		Double pesoAttuale = Double.parseDouble(request.getParameter("pesoAtt"));
+		Double obiettivo = Double.parseDouble(request.getParameter("obiettivo"));
 	    String sesso = request.getParameter("sesso");
 		int altezza = Integer.parseInt(request.getParameter("altezza"));	
 		String nazionalita = request.getParameter("nazionalita");

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+<link href="CSS/style1.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="banner"></div>
+<div  class="header">
+ <div class="header1">
+   <div class="logo"><a href="homepage.html"><img src="images/logo1.png" alt="logo-1"></a></div>
+       <a href="Login.jsp">Login</a>
+	   <a href="Registrazione.jsp">Registrati</a>
+	   
+ </div>
+<div class="header2">
+			<a href="Login.jsp">Diario</a> 
+			<a href="Login.jsp">Grafici</a> 
+			<a href="Login.jsp">Impostazioni</a> 
+			<a href="Login.jsp">Help</a>
+</div>
+</div>
+<!-- Inizio slideshows 
+<h2>Automatic Slideshow</h2>
+<p>Change image every 2 seconds:</p>-->
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="images/img1.jpg" >
+  <div class="text">Caption Text</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="images/img2.jpg" >
+  <div class="text">Caption Two</div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="images/img3.jpg" >
+  <div class="text">Caption Three</div>
+</div>
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+
+
+<div class="contain">
+    <h2>Bentornato  (+User)</h2>
+    <p>
+    Il tuo Diario Alimentare Sempre a disposizione!<br>
+    Segni tutto quello che hai mangiato Oggi.</p>
+  <div class="uno">
+  <a href="Login.jsp">Accedi al tuo<br>diario</a> 
+  </div><br><br>
+   <p> Osserva Dettagliatamente i tuoi risultati</p>
+  <div class="uno">
+  <a href="Login.jsp">Accedi ai<br>grafici</a> 
+  
+  </div>
+  
+
+</div>
+<div class="footer">
+  <a  target="_blank" href="http://www.facebook.com"><img src="images/face2.png" 
+  alt="face-1"></a>
+  <a  target="_blank"  href="http://www.twitter.com"><img src="images/twi1.png" 
+  alt="tw-1"></a>
+
+</div>
+
+</body>
+</html>

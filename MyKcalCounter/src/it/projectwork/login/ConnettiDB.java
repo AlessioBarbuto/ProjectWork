@@ -1,10 +1,14 @@
 package it.projectwork.login;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ConnettiDB {
 
@@ -40,6 +44,7 @@ public class ConnettiDB {
 		while (letti.next()) {
 			UserInDB = letti.getString("username");
 			PassInDB = letti.getString("password");
+			
 		}
 		if (insertUser.equals(UserInDB) && insertPass.equals(PassInDB)) {
 		s=true;}
@@ -53,7 +58,7 @@ public class ConnettiDB {
 	
 	
 	//metodo per la creazione delle credenziali (REGISTRAZIONE)
-	public void eseguiQuery(String username, String password, double pesoAttuale, double obiettivo, String sesso, int altezza, String nazionalita) throws SQLException {
+	public void registraUtente(String username, String password, double pesoAttuale, double obiettivo, String sesso, int altezza, String nazionalita) throws SQLException {
 		
 		Statement st = null;
 		Connection cn = this.connessione();
@@ -72,6 +77,60 @@ public class ConnettiDB {
 		}
 	}
 		
+	//metodo per l'inserimento degli alimenti (REGISTRAZIONE ALIMENTI)
+	public void inserisciAlimento(LocalDateTime giorno, String alimento, double quantita, String pasto, String utente) throws SQLException {
+		
+		Statement st = null;
+		Connection cn = this.connessione();
+		
+	    //creo statement ed eseguo INSERT
+		try {
+		st = cn.createStatement();
+		st.executeUpdate("INSERT INTO nutrizione.consumati (giorno, alimento, quantita, pasto, utente) "
+				+"VALUES ('"+giorno+"','"+alimento+"','"+quantita+"','"+pasto+"','"+utente+"');");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+	    cn.close(); //chiudo connessione
+		}
+	}
+	
+	//metodo per selezionare gli alimenti dal database (SELECT ALIMENTI)
+		public void selezionaAlimentiPerGiorno(String user, LocalDateTime data) throws SQLException {
+			
+			PreparedStatement preparedStatement=null;
+			Connection cn = this.connessione();
+			
+			try {
+		    String query = "SELECT * FROM nutrizione.consumati LEFT JOIN nutrizione.alimenti ON consumati.alimento = alimenti.NOME WHERE giorno =? AND username =?";
+			preparedStatement = cn.prepareStatement(query);
+			
+			preparedStatement.setString(1, "\" "+data+"\"");
+			preparedStatement.setString(2, "\" "+user+"\"");
+			int righeSelezionate= preparedStatement.executeUpdate();
+			System.out.println("Righe selezionate: " + righeSelezionate);
+			
+			ResultSet letti = preparedStatement.executeQuery(query);
+			
+			while (letti.next()) {
+				String alimentoLetto = letti.getString("alimento");
+				int kcalLetto = letti.getInt("kcal");
+				double carboLetto = letti.getDouble("carboidrati");
+				double protLetto = letti.getDouble("proteine");
+				double grassiLetto = letti.getDouble("grassi");
+				String pastoLetto = letti.getString("pasto");
+				
+				
+				System.out.println("selezionato: "+alimentoLetto+", "+kcalLetto);
+		}
+			} catch (SQLException e) {
+				e.printStackTrace();}
+			
+			
+			}
+	
 
 
 }

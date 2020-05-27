@@ -3,26 +3,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Registrazione - Diario Alimentare</title>
+
+<link rel="stylesheet" type="text/css" href="CSS/style1.css">
+
+<title>Registrazione - MyKcalCounter</title>
 </head>
 <body>
 
-<h1>Inserisci i dati di registrazione</h1>
+<!-- immagine -->
+<img class="logo" src="logo.png" style="display:block;margin:auto" height="100px" width="150px"
+		alt="impossibile caricare l'immagine">  
+<br>
 
-<form action="RegistrationServlet"  method=get>
+<h1 >Inserisci i dati di registrazione</h1>
+
+<!-- Form inserimento dati -->
+<form class="form" action="RegistrationServlet"  method=get>
   
   
-  <label for="usnm">Username:</label>
-  <input type="text" id="usnm" name="usnm">
-  <label for="pssw">Password:</label>
-  <input type="password" id="pssw" name="pssw">
+  <label for="user">Username:</label>
+  <input type="text" id="user" name="user">
+  <label for="pass">Password:</label>
+  <input type="password" id="pass" name="pass">
   
   <br>
   <br>
   <fieldset><legend>Dati personali</legend>
   <label for="pesoAtt">Peso attuale:</label>
-  <input type="number" step="0.01" min="0" max="120" id="pesoAtt" name="pesoAtt">
+  <input type="number" step="0.01" min="40" max="120" id="pesoAtt" name="pesoAtt">
   
   <br>
   <br>
@@ -54,9 +62,10 @@
   
   </fieldset>
   <br>
+  <a  href="http://localhost:8080/MyJavaServerPages/Login.jsp">Gia registrato? Login</a>
   <br>
   <br>
-<input type="submit" value="Invia">
+<input class="invia" type="submit" value="Invia">
 </form>
 
 

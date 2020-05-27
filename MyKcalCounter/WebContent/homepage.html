@@ -3,32 +3,73 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Home Page</title>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <link href="CSS/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="CSS/menu.css">
+<link rel="stylesheet" type="text/css" href="CSS/all.min.css">
+<link rel="stylesheet" href="CSS/owl.carousel.min.css">
+<link rel="stylesheet" href="CSS/owl.theme.default.min.css">
+<link rel="stylesheet" type="text/css" href="CSS/styles.css">
+<script src="JS/jquery-3.4.1.min.js"></script>
+<script src="JS/owl.carousel.min.js"></script>
+<script src="JS/script.js"></script>
 </head>
 <body>
 <div class="banner"></div>
 <div  class="header">
  <div class="header1">
-   <div class="logo"><a href="homepage.html"><img src="images/logo1.png" alt="logo-1"></a></div>
-       <a href="Login.jsp">Login</a>
-	   <a href="Registrazione.jsp">Registrati</a>
-	   
- </div>
+     <div class="logo"><a href="homepage.html"><img src="images/logo1.png" alt="logo-1"></a></div>
+     <div class="link"> <a href="Login.jsp">Login</a></div>
+	 <div class="link"><a href="Registrazione.jsp">Registrati</a></div>
+</div>
 <div class="header2">
-			<a href="Login.jsp">Diario</a> 
-			<a href="Login.jsp">Grafici</a> 
-			<a href="Login.jsp">Impostazioni</a> 
-			<a href="Login.jsp">Help</a>
+<ul class="nav site-nav">
+<li class="flyout">
+<a href="#">About</a>
+<!-- Flyout -->
+ <ul class="flyout-content nav stacked">
+<li class="flyout-alt"><a href="#">Versione</a>
+ <ul class="flyout-content nav stacked">
+ <li><a href="#">1.1.2020</a></li>
+ </ul>
+</li>
+<li class="flyout-alt"><a href="#">Data di siviluppo</a>
+ <ul class="flyout-content nav stacked">
+<li><a href="#">27/05/2020</a></li>
+</ul>
+</li>
+<li class="flyout-alt">
+<a href="#">Autori</a>
+<!-- Flyout -->
+<ul class="flyout-content nav stacked">
+<li><a href="#">Andrea<br><br>Alessio<br><br>Alessandro<br>Suzie</a></li>
+</ul>
+</li>
+</ul>
+<!-- * -->
+<li><a href="#">Diario</a><!-- * -->
+<li><a href="#">grafici</a><!-- * -->
+<li><a href="#">Impostazione</a><!-- * -->
+<li class="flyout"><a href="#">Help</a>
+<ul class="flyout-content nav stacked">
+<li><a href="#">Come Registrati</a></li>
+<li><a href="#">Come Personalizzare<br><br> la Mia Dieta</a></li><!-- * -->
+</ul>
+</ul>
+
+             <!-- <a href="homepage.html">About</a> 
+			 <a href="Login.jsp">Diario</a> 
+			 <a href="Login.jsp">Grafici</a> 
+			 <a href="Login.jsp">Impostazioni</a> 
+			 <a href="Login.jsp">Help</a>-->
 </div>
 </div>
-<!-- Inizio slideshows 
-<h2>Automatic Slideshow</h2>
-<p>Change image every 2 seconds:</p>-->
+<!-- Inizio slideshows -->
 <div class="slideshow-container">
 
 <div class="mySlides fade">
   <div class="numbertext">1 / 3</div>
-  <img src="images/img1.jpg" >
+  <img src="images/img5.jpg" >
   <div class="text">Caption Text</div>
 </div>
 
@@ -54,7 +95,6 @@
 <script>
 var slideIndex = 0;
 showSlides();
-
 function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
@@ -72,9 +112,6 @@ function showSlides() {
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
 </script>
-
-
-
 <div class="contain">
     <h2>Bentornato  (+User)</h2>
     <p>
@@ -86,18 +123,44 @@ function showSlides() {
    <p> Osserva Dettagliatamente i tuoi risultati</p>
   <div class="uno">
   <a href="Login.jsp">Accedi ai<br>grafici</a> 
-  
+ </div>
+     <div class="owl-carousel">
+             <div class="item"> <img src="images/img1.jpg" alt="beyon"> </div>
+             <div class="item"> <img src="images/img2.jpg" alt="beyon"> </div>
+              <div class="item"> <img src="images/img3.jpg" alt="beyon"> </div>
+              <div class="item"> <img src="images/img4.png" alt="beyon"> </div>
+              <div class="item"> <img src="images/img5.jpg" alt="beyon"> </div>
+              <div class="item"> <img src="images/img6.jpg" alt="beyon"> </div>
+             <div class="item"> <img src="images/img7.jpg" alt="beyon"> </div>
+         </div>
+         <script>
+         var owl = $('.owl-carousel');
+         owl.owlCarousel({
+             items:4,
+             loop:true,
+             margin:10,
+             autoplay:true,
+             autoplayTimeout:1000,
+             autoplayHoverPause:true
+         });
+         $('.play').on('click',function(){
+             owl.trigger('play.owl.autoplay',[1000])
+         })
+         $('.stop').on('click',function(){
+             owl.trigger('stop.owl.autoplay')
+         })
+         
+         </script>
+           <div class="link"><a href="Registrazione.jsp">Registrati</a></div>
+	 
   </div>
-  
-
-</div>
 <div class="footer">
-  <a  target="_blank" href="http://www.facebook.com"><img src="images/face2.png" 
-  alt="face-1"></a>
-  <a  target="_blank"  href="http://www.twitter.com"><img src="images/twi1.png" 
-  alt="tw-1"></a>
-
-</div>
-
+  <p> CONTATTI:<br>011200649<br>EMAIL:<br>mykcalcounter@gmail.com</p>
+   <a  target="_blank" href="http://www.facebook.com"><img src="images/face2.png" alt="face-1"></a>
+   <a  target="_blank"  href="http://www.twitter.com"><img src="images/twi1.png"  alt="tw-1"></a>
+   <a  target="_blank"  href="http://www.instagram.com"><img src="images/insta.jpg"  alt="tw-1"></a>
+   <a  target="_blank"  href="http://www.youtube.com"><img src="images/you.png"  alt="tw-1"></a>
+   <a target="_blank"  href="http://www.twitter.com"><img src="images/email.jpg"  alt="tw-1"></a>
+ </div>
 </body>
 </html>

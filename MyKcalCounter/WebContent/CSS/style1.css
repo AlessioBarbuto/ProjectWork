@@ -27,19 +27,7 @@ body{
  max-width:1000px;
  height:50%;
  }
-/*.header2{
- max-width:1000px;
- height:35%;
- background-color:orange;
- color:white;
- text-align:center;
- padding-top:5px;
- }
-.header2 a{
-color:white;
-margin-right:2%;
-font-size:1.5rem;
-}	*/	
+
 .logo{
 width:160px;
 height:100%;
@@ -80,7 +68,7 @@ float:left;
   height:600px;
   position: relative;
   margin: auto;
-  margin-top:150px;
+  margin-top:170px;
   margin-bottom:5px;
 }
 .text {

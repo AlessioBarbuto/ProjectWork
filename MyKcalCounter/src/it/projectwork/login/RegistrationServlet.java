@@ -28,7 +28,7 @@ public class RegistrationServlet extends HttpServlet {
 		int altezza = Integer.parseInt(request.getParameter("altezza"));	
 		String nazionalita = request.getParameter("nazionalita");
 
-		//eseguo l'INSERT con il metodo eseguiQuery
+		//eseguo l'INSERT con il metodo registraUtente()
 
 		try {
 			nuovaConnessione.registraUtente(username, password, pesoAttuale, obiettivo, sesso, altezza, nazionalita);

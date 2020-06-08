@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/RegistrationServlet")
@@ -35,7 +36,8 @@ public class RegistrationServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		HttpSession session = request.getSession();
+		session.setAttribute("user", username);
 		//reindirizzo verso una nuova pagina
 		response.sendRedirect("homepage.html");
 

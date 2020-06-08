@@ -73,13 +73,13 @@
 			<br> <br>
 			<fieldset>
 				<legend>Dati personali</legend>
-				<label for="pesoAtt">Peso attuale:</label> <input type="number"
+				<label for="pesoAtt">Peso attuale)(kg):</label> <input type="number"
 					class="name entry " id="pesoAtt" name="pesoAtt"> <br>
-				<br> <label for="obiettivo">Obiettivo:</label> <input
+				<br> <label for="obiettivo">Obiettivo (kg):</label> <input
 					type="number" step="0.01" min="40" max="120" class="name entry "
 					id="obiettivo" name="obiettivo"> <br> <br> <label
 					for="altezza">Altezza (cm):</label> <input type="number"
-					step="0.01" min="40" max="120" class="name entry " id="altezza"
+					step="0.01" min="120" max="220" class="name entry " id="altezza"
 					name="altezza"><br>
 				<br> Femmina<input type="radio" name="sesso" value="F">
 				Maschio <input type="radio" name="sesso" value="M"> <br>

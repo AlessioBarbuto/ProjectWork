@@ -38,24 +38,19 @@
 							</ul></li>
 						<li class="flyout-alt"><a href="#">Autori</a> <!-- Flyout -->
 							<ul class="flyout-content nav stacked">
-								<li><a href="#">Andrea<br>
-									<br>Alessio<br>
-									<br>Alessandro<br>
-									<br>Suzie
+								<li><a href="#">Andrea<br> <br>Alessio<br>
+										<br>Alessandro<br> <br>Suzie
 								</a></li>
 							</ul></li>
 					</ul> <!-- * -->
-				<li><a href="#">Diario</a>
-				<!-- * -->
-				<li><a href="#">grafici</a>
-				<!-- * -->
-				<li><a href="#">Impostazioni</a>
-				<!-- * -->
+				<li><a href="#">Diario</a> <!-- * -->
+				<li><a href="#">grafici</a> <!-- * -->
+				<li><a href="#">Impostazioni</a> <!-- * -->
 				<li class="flyout"><a href="#">Help</a>
 					<ul class="flyout-content nav stacked">
 						<li><a href="#">Come Registrarsi</a></li>
-						<li><a href="#">Come Inserire alimenti<br>
-							<br> nel mio diario
+						<li><a href="#">Come Inserire alimenti<br> <br>
+								nel mio diario
 						</a></li>
 						<!-- * -->
 					</ul>
@@ -69,7 +64,7 @@
 		<form class="form" action="LoginServlet" method=post>
 			<input type="text" class="name entry " id="user" name="user"
 				placeholder="Nome" /> <input type="text" class="email entry"
-				id="pass" name="pass" placeholder="Password" />
+				id="pass" type="password" name="pass" placeholder="Password" />
 			<button class="submit entry" onclick="thanks()">Invia</button>
 			<a href="http://localhost:8080/MyKcalCounter/Registrazione.jsp">Registrati</a>
 			<div class="shadow"></div>

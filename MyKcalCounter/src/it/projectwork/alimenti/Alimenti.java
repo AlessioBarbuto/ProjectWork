@@ -1,13 +1,13 @@
 package it.projectwork.alimenti;
 
 public class Alimenti {
-	
+
 	private String nome;
 	private double carboidrati;
 	private double grassi;
 	private double proteine;
 	private int kcal;
-	
+
 	//getters e setters
 	public String getNome() {
 		return nome;
@@ -39,12 +39,12 @@ public class Alimenti {
 	public void setKcal(int kcal) {
 		this.kcal = kcal;
 	}
-	
+
 	@Override
 	public String toString() {
 		return  nome + carboidrati + grassi + proteine + kcal;
 	}
-	
-	
+
+
 
 }

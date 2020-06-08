@@ -8,7 +8,12 @@
 <html>
 <head>
 <head>
-<link rel="stylesheet" type="text/css" href="resources/StileDiario.css">
+<link href="CSS/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="CSS/menu.css">
+<link rel="stylesheet" type="text/css" href="CSS/all.min.css">
+<link rel="stylesheet" href="CSS/owl.carousel.min.css">
+<link rel="stylesheet" href="CSS/owl.theme.default.min.css">
+<link rel="stylesheet" type="text/css" href="CSS/styles.css">
 </head>
 
 <meta charset="ISO-8859-1">
@@ -16,30 +21,57 @@
 
 </head>
 
-<body>
-	<a href="http://localhost:8080/MyJavaServerPages/Benvenuto.jsp/"> <img
-		src="logo.png" height="100px" width="150px"
-		alt="impossibile caricare l'immagine"></a>
-	<br>
-	<br>
+<body class="contactBody">
+	<div class="banner"></div>
+	<div class="header">
+		<div class="header1">
+			<div class="logo">
+				<a href="Login.jsp"><img src="images/logo1.png" alt="logo-1"></a>
+			</div>
+		</div>
 
-	<nav>
-		<a href="http://localhost:8080/MyJavaServerPages/Diario.jsp/">Diario</a>
-		| <a href="http://localhost:8080/MyJavaServerPages/Grafici.jsp/">Grafici</a>
-		| <a href="http://localhost:8080/MyJavaServerPages/Impostazioni.jsp/">Impostazioni</a>
-		| <a href="http://localhost:8080/MyJavaServerPages/Help.jsp/">Help</a>
-		|
-
-	</nav>
+		<div class="header2">
+			<ul class="nav site-nav">
+				<li class="flyout"><a href="#">About</a> <!-- Flyout -->
+					<ul class="flyout-content nav stacked">
+						<li class="flyout-alt"><a href="#">Versione</a>
+							<ul class="flyout-content nav stacked">
+								<li><a href="#">1.1.2020</a></li>
+							</ul></li>
+						<li class="flyout-alt"><a href="#">Data di siviluppo</a>
+							<ul class="flyout-content nav stacked">
+								<li><a href="#">27/05/2020</a></li>
+							</ul></li>
+						<li class="flyout-alt"><a href="#">Autori</a> <!-- Flyout -->
+							<ul class="flyout-content nav stacked">
+								<li><a href="#">Andrea<br> <br>Alessio<br>
+										<br>Alessandro<br> <br>Suzie
+								</a></li>
+							</ul></li>
+					</ul> <!-- * -->
+				<li><a href="#">Diario</a> <!-- * -->
+				<li><a href="#">grafici</a> <!-- * -->
+				<li><a href="#">Impostazioni</a> <!-- * -->
+				<li class="flyout"><a href="#">Help</a>
+					<ul class="flyout-content nav stacked">
+						<li><a href="#">Come Registrarsi</a></li>
+						<li><a href="#">Come Inserire alimenti<br> <br>
+								nel mio diario
+						</a></li>
+						<!-- * -->
+					</ul>
+			</ul>
+		</div>
+	</div>
 
 	<!-- messaggio di bentornato -->
-	<h3>
+	<h2>
 		Bentornato nel tuo diario
 		<%
 		out.println(session.getAttribute("user"));
 	%>
 		<br> <br>
-	</h3>
+	</h2>
 
 	<!-- connessione con il DB -->
 	<%
@@ -58,38 +90,46 @@
 	Statement statement3 = dbconn.createStatement();
 	Statement statement4 = dbconn.createStatement();
 	Statement statement5 = dbconn.createStatement();
+	Statement statement6 = dbconn.createStatement();
 
 	//imposto i parametri data e user
-	String user = "pino"; //(String) session.getAttribute("user");
+	String user = (String) session.getAttribute("user");
 	LocalDate data = LocalDate.now();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	data.format(formatter);
 
 	String query = "SELECT * FROM nutrizione.consumati LEFT JOIN nutrizione.alimenti ON consumati.alimento = "
-			+ "alimenti.NOME WHERE giorno ="+ "'"+ data +"'"+ " AND utente="+ "'" + user +"'"+ "";
+			+ "alimenti.NOME WHERE giorno =" + "'" + data + "'" + " AND utente=" + "'" + user + "'" + "";
 	ResultSet rs1 = statement1.executeQuery(query);
 	ResultSet rs2 = statement2.executeQuery(query);
-    ResultSet rs3 = statement3.executeQuery(query);
-    ResultSet rs4 = statement4.executeQuery(query);
-    ResultSet rs5 = statement5.executeQuery(query);
-
+	ResultSet rs3 = statement3.executeQuery(query);
+	ResultSet rs4 = statement4.executeQuery(query);
+	ResultSet rs5 = statement5.executeQuery(query);
+	ResultSet rs6 = statement6.executeQuery(query);
 	%>
 
 	<div>
-		<label for="name"><strong> Colazione :</strong> </label> <br>
-
-
-		<% while (rs1.next()) {
-				double qta = rs1.getDouble("quantita");
-				
-				if(rs1.getString("pasto").equalsIgnoreCase("Colazione")){
-					out.println(rs1.getString("nome")+"    Qtà(grammi):"+qta*100+"    Carboidrati:"+rs1.getDouble("carboidrati")*qta+
-							"    Grassi:"+rs1.getDouble("grassi")*qta
-					+"    Proteine:"+rs1.getDouble("proteine")*qta+"    Kcal:"+rs1.getDouble("kcal")*qta); 
-					%>
+		<h4>
+			<strong> Colazione :</strong>
+		</h4>
 		<br>
-		<%  }
-				 } rs1.close(); %>
+
+
+		<%
+			while (rs1.next()) {
+			double qta = rs1.getDouble("quantita");
+
+			if (rs1.getString("pasto").equalsIgnoreCase("Colazione")) {
+				out.println(rs1.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+				+ rs1.getDouble("carboidrati") * qta + "    Grassi:" + rs1.getDouble("grassi") * qta + "    Proteine:"
+				+ rs1.getDouble("proteine") * qta + "    Kcal:" + rs1.getInt("kcal") * qta);
+		%>
+		<br>
+		<%
+			}
+		}
+		rs1.close();
+		%>
 
 
 	</div>
@@ -100,18 +140,25 @@
 	</div>
 	<br>
 	<div class="form-example">
-		<label for="name"><strong>Merenda :</strong> </label> <br>
-		<% while (rs2.next()) {
-				double qta = rs2.getDouble("quantita");
-				
-				if(rs2.getString("pasto").equalsIgnoreCase("Merenda")){
-					out.println(rs2.getString("nome")+"    Qtà(grammi):"+qta*100+"    Carboidrati:"+rs2.getDouble("carboidrati")*qta+
-							"    Grassi:"+rs2.getDouble("grassi")*qta
-					+"    Proteine:"+rs2.getDouble("proteine")*qta+"    Kcal:"+rs2.getDouble("kcal")*qta); 
-					%>
+		<h4>
+			<strong>Merenda : 
+		</h4>
+		</label> <br>
+		<%
+			while (rs2.next()) {
+			double qta = rs2.getDouble("quantita");
+
+			if (rs2.getString("pasto").equalsIgnoreCase("Merenda")) {
+				out.println(rs2.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+				+ rs2.getDouble("carboidrati") * qta + "    Grassi:" + rs2.getDouble("grassi") * qta + "    Proteine:"
+				+ rs2.getDouble("proteine") * qta + "    Kcal:" + rs2.getInt("kcal") * qta);
+		%>
 		<br>
-		<%  }
-				 } rs2.close();%>
+		<%
+			}
+		}
+		rs2.close();
+		%>
 
 	</div>
 	<br>
@@ -121,18 +168,25 @@
 	</div>
 	<br>
 	<div class="form">
-		<label for="name"><strong>Pranzo :</strong> </label> <br>
-		<% while (rs3.next()) {
-				double qta = rs3.getDouble("quantita");
-				
-				if(rs3.getString("pasto").equalsIgnoreCase("Pranzo")){
-					out.println(rs3.getString("nome")+"    Qtà(grammi):"+qta*100+"    Carboidrati:"+rs3.getDouble("carboidrati")*qta+
-							"    Grassi:"+rs3.getDouble("grassi")*qta
-					+"    Proteine:"+rs3.getDouble("proteine")*qta+"    Kcal:"+rs3.getDouble("kcal")*qta); 
-					%>
+		<h4>
+			<strong>Pranzo :</strong>
+		</h4>
 		<br>
-		<%  }
-				 } rs3.close(); %>
+		<%
+			while (rs3.next()) {
+			double qta = rs3.getDouble("quantita");
+
+			if (rs3.getString("pasto").equalsIgnoreCase("Pranzo")) {
+				out.println(rs3.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+				+ rs3.getDouble("carboidrati") * qta + "    Grassi:" + rs3.getDouble("grassi") * qta + "    Proteine:"
+				+ rs3.getDouble("proteine") * qta + "    Kcal:" + rs3.getInt("kcal") * qta);
+		%>
+		<br>
+		<%
+			}
+		}
+		rs3.close();
+		%>
 
 	</div>
 	<br>
@@ -142,18 +196,25 @@
 	</div>
 	<br>
 	<div class="form">
-		<label for="name"><strong>Spuntino :</strong> </label> <br>
-		<% while (rs4.next()) {
-				double qta = rs4.getDouble("quantita");
-				
-				if(rs4.getString("pasto").equalsIgnoreCase("Spuntino")){
-					out.println(rs4.getString("nome")+"    Qtà(grammi):"+qta*100+"    Carboidrati:"+rs4.getDouble("carboidrati")*qta+
-							"    Grassi:"+rs4.getDouble("grassi")*qta
-					+"    Proteine:"+rs4.getDouble("proteine")*qta+"    Kcal:"+rs4.getDouble("kcal")*qta); 
-					%>
+		<h4>
+			<strong>Spuntino :</strong>
+		</h4>
 		<br>
-		<%  }
-				 } rs4.close(); %>
+		<%
+			while (rs4.next()) {
+			double qta = rs4.getDouble("quantita");
+
+			if (rs4.getString("pasto").equalsIgnoreCase("Spuntino")) {
+				out.println(rs4.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+				+ rs4.getDouble("carboidrati") * qta + "    Grassi:" + rs4.getDouble("grassi") * qta + "    Proteine:"
+				+ rs4.getDouble("proteine") * qta + "    Kcal:" + rs4.getInt("kcal") * qta);
+		%>
+		<br>
+		<%
+			}
+		}
+		rs4.close();
+		%>
 	</div>
 	<br>
 	<div class="form">
@@ -162,27 +223,81 @@
 	</div>
 	<br>
 	<div class="form">
-		<label for="name"><strong>Cena :</strong> </label> <br>
-		<% while (rs5.next()) {
-				double qta = rs5.getDouble("quantita");
-				
-				if(rs5.getString("pasto").equalsIgnoreCase("Cena")){
-					out.println(rs5.getString("nome")+"    Qtà(grammi):"+qta*100+"    Carboidrati:"+rs5.getDouble("carboidrati")*qta+
-							"    Grassi:"+rs5.getDouble("grassi")*qta
-					+"    Proteine:"+rs5.getDouble("proteine")*qta+"    Kcal:"+rs5.getDouble("kcal")*qta); 
-					%>
+		<h4>
+			<strong>Cena :</strong>
+		</h4>
 		<br>
-		<%  }
-				 } rs5.close(); %>
+		<%
+			while (rs5.next()) {
+			double qta = rs5.getDouble("quantita");
+
+			if (rs5.getString("pasto").equalsIgnoreCase("Cena")) {
+				out.println(rs5.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+				+ rs5.getDouble("carboidrati") * qta + "    Grassi:" + rs5.getDouble("grassi") * qta + "    Proteine:"
+				+ rs5.getDouble("proteine") * qta + "    Kcal:" + rs5.getInt("kcal") * qta);
+		%>
+		<br>
+		<%
+			}
+		}
+		rs5.close();
+		%>
 
 	</div>
 	<br>
 	<div class="form">
-		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci alimento</a>
+		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
+			alimento</a>
+	</div>
+	<br>
+	<br>
+	<%
+		AlimentiRegistrati alimento = new AlimentiRegistrati();
+	ArrayList<AlimentiRegistrati> toSum = new ArrayList<AlimentiRegistrati>();
+
+	while (rs6.next()) {
+		double qta = rs6.getDouble("quantita");
+		alimento.setCarboidrati(rs6.getDouble("carboidrati") * qta);
+		alimento.setGrassi(rs6.getDouble("grassi") * qta);
+		alimento.setProteine(rs6.getDouble("proteine") * qta);
+		alimento.setKcal((int) Math.round(rs6.getInt("kcal") * qta));
+
+		toSum.add(alimento);
+	}
+	rs6.close();
+
+	int cho = 0;
+	int fat = 0;
+	int pro = 0;
+	int cal = 0;
+
+	for (AlimentiRegistrati alim : toSum) {
+		cho += (int) Math.round(alim.getCarboidrati());
+		fat += (int) Math.round(alim.getGrassi());
+		pro += (int) Math.round(alim.getProteine());
+		cal += (int) Math.round(alim.getKcal());
+	}
+%>
+	<div class="totale">
+		<%out.println("carboidrati: " + cho + "  grassi: " + fat + "  proteine: " + pro + "  kcal: " + cal);
+	%>
 	</div>
 	<br>
 	<br>
 
-
+	<div class=form></div>
+	<div class="footer">
+		<p>
+			CONTATTI:<br>011200649<br>EMAIL:<br>mykcalcounter@gmail.com
+		</p>
+		<a target="_blank" href="http://www.facebook.com"><img
+			src="images/face2.png" alt="face-1"></a> <a target="_blank"
+			href="http://www.twitter.com"><img src="images/twi1.png"
+			alt="tw-1"></a> <a target="_blank" href="http://www.instagram.com"><img
+			src="images/insta.jpg" alt="tw-1"></a> <a target="_blank"
+			href="http://www.youtube.com"><img src="images/you.png"
+			alt="tw-1"></a> <a target="_blank" href="http://www.twitter.com"><img
+			src="images/email.jpg" alt="tw-1"></a>
+	</div>
 </body>
 </html>

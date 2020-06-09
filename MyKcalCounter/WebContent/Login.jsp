@@ -17,7 +17,7 @@
 	<div class="header">
 		<div class="header1">
 			<div class="logo">
-				<a href="Login.jsp"><img src="images/logo1.png" alt="logo-1"></a>
+				<a href="http://localhost:8080/MyKcalCounter/homepage.html"><img src="images/logo1.png" alt="logo-1"></a>
 			</div>
 			<!--  
     <div class="link"> <a href="Login.jsp">Login</a></div>
@@ -43,9 +43,9 @@
 								</a></li>
 							</ul></li>
 					</ul> <!-- * -->
-				<li><a href="#">Diario</a> <!-- * -->
+				<li><a href="http://localhost:8080/MyKcalCounter/Diario.jsp">Diario</a> <!-- * -->
 				<li><a href="#">grafici</a> <!-- * -->
-				<li><a href="#">Impostazioni</a> <!-- * -->
+				<li><a href="http://localhost:8080/MyKcalCounter/Impostazioni.jsp">Impostazioni</a> <!-- * -->
 				<li class="flyout"><a href="#">Help</a>
 					<ul class="flyout-content nav stacked">
 						<li><a href="#">Come Registrarsi</a></li>

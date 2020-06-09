@@ -21,8 +21,8 @@ public class RegistrationServlet extends HttpServlet {
 		ConnettiDB nuovaConnessione = new ConnettiDB();
 
 		//creo le variabili che immagazzinano i parametri in input
-		String username = request.getParameter("usnm");
-		String password = request.getParameter("pssw");
+		String username = request.getParameter("usern");
+		String password = request.getParameter("passw");
 		Double pesoAttuale = Double.parseDouble(request.getParameter("pesoAtt"));
 		Double obiettivo = Double.parseDouble(request.getParameter("obiettivo"));
 	    String sesso = request.getParameter("sesso");

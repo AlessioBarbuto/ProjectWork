@@ -1,7 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" import="java.sql.*" import="java.time.*"
 	import="java.time.format.DateTimeFormatter"
-	import="java.util.ArrayList"
+	import="java.util.ArrayList" import="java.text.DecimalFormat"
 	import="it.projectwork.alimenti.AlimentiRegistrati"
 	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 </head>
 
 <meta charset="ISO-8859-1">
-<title>DIARIO</title>
+<title>Diario - MyKcalCounter</title>
 
 </head>
 
@@ -63,227 +63,241 @@
 			</ul>
 		</div>
 	</div>
+	<div align="center">
+		<!-- messaggio di bentornato -->
+		<h2>
+			Bentornato nel tuo diario
+			<%
+			out.println(session.getAttribute("user"));
+		%>
+			<br> <br>
+		</h2>
 
-	<!-- messaggio di bentornato -->
-	<h2>
-		Bentornato nel tuo diario
+		<!-- connessione con il DB -->
 		<%
-		out.println(session.getAttribute("user"));
-	%>
-		<br> <br>
-	</h2>
+			Connection dbconn = null;
 
-	<!-- connessione con il DB -->
-	<%
-		Connection dbconn = null;
+		// carica il file di classe del driver 
+		Class.forName("com.mysql.cj.jdbc.Driver");
 
-	// carica il file di classe del driver 
-	Class.forName("com.mysql.cj.jdbc.Driver");
+		// apre la connessione con il database "nutrizione"
+		dbconn = DriverManager
+				.getConnection("jdbc:mysql://localhost:3306/nutrizione?user=root&password=Alessio97&serverTimezone=UTC");
 
-	// apre la connessione con il database "nutrizione"
-	dbconn = DriverManager
-			.getConnection("jdbc:mysql://localhost:3306/nutrizione?user=root&password=Alessio97&serverTimezone=UTC");
+		// manda in esecuzione l'istruzione SQL
+		Statement statement1 = dbconn.createStatement();
+		Statement statement2 = dbconn.createStatement();
+		Statement statement3 = dbconn.createStatement();
+		Statement statement4 = dbconn.createStatement();
+		Statement statement5 = dbconn.createStatement();
+		Statement statement6 = dbconn.createStatement();
 
-	// manda in esecuzione l'istruzione SQL
-	Statement statement1 = dbconn.createStatement();
-	Statement statement2 = dbconn.createStatement();
-	Statement statement3 = dbconn.createStatement();
-	Statement statement4 = dbconn.createStatement();
-	Statement statement5 = dbconn.createStatement();
-	Statement statement6 = dbconn.createStatement();
+		//imposto i parametri data e user
+		String user = (String) session.getAttribute("user");
+		LocalDate data = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		data.format(formatter);
 
-	//imposto i parametri data e user
-	String user = (String) session.getAttribute("user");
-	LocalDate data = LocalDate.now();
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-	data.format(formatter);
+		String query = "SELECT * FROM nutrizione.consumati LEFT JOIN nutrizione.alimenti ON consumati.alimento = "
+				+ "alimenti.NOME WHERE giorno =" + "'" + data + "'" + " AND utente=" + "'" + user + "'" + "";
+		ResultSet rs1 = statement1.executeQuery(query);
+		ResultSet rs2 = statement2.executeQuery(query);
+		ResultSet rs3 = statement3.executeQuery(query);
+		ResultSet rs4 = statement4.executeQuery(query);
+		ResultSet rs5 = statement5.executeQuery(query);
+		ResultSet rs6 = statement6.executeQuery(query);
+		%>
 
-	String query = "SELECT * FROM nutrizione.consumati LEFT JOIN nutrizione.alimenti ON consumati.alimento = "
-			+ "alimenti.NOME WHERE giorno =" + "'" + data + "'" + " AND utente=" + "'" + user + "'" + "";
-	ResultSet rs1 = statement1.executeQuery(query);
-	ResultSet rs2 = statement2.executeQuery(query);
-	ResultSet rs3 = statement3.executeQuery(query);
-	ResultSet rs4 = statement4.executeQuery(query);
-	ResultSet rs5 = statement5.executeQuery(query);
-	ResultSet rs6 = statement6.executeQuery(query);
-	%>
-
-	<div>
-		<h4>
-			<strong> Colazione :</strong>
-		</h4>
-		<br>
+		<div>
+			<h4>
+				<strong> Colazione :</strong>
+			</h4>
+			<br>
 
 
-		<%
+			<%
+				DecimalFormat df = new DecimalFormat("#.##"); // per troncare a 2 cifre decimali
+
 			while (rs1.next()) {
-			double qta = rs1.getDouble("quantita");
+				double qta = rs1.getDouble("quantita");
 
-			if (rs1.getString("pasto").equalsIgnoreCase("Colazione")) {
-				out.println(rs1.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
-				+ rs1.getDouble("carboidrati") * qta + "    Grassi:" + rs1.getDouble("grassi") * qta + "    Proteine:"
-				+ rs1.getDouble("proteine") * qta + "    Kcal:" + rs1.getInt("kcal") * qta);
-		%>
-		<br>
-		<%
+				if (rs1.getString("pasto").equalsIgnoreCase("Colazione")) {
+					out.println(rs1.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+					+ df.format(rs1.getDouble("carboidrati") * qta) + "    Grassi:"
+					+ df.format(rs1.getDouble("grassi") * qta) + "    Proteine:"
+					+ df.format(rs1.getDouble("proteine") * qta) + "    Kcal:" + df.format(rs1.getInt("kcal") * qta));
+			%>
+			<br>
+			<%
+				}
 			}
-		}
-		rs1.close();
-		%>
+			rs1.close();
+			%>
 
 
-	</div>
-	<br>
-	<div class="form-example">
-		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
-			alimento</a>
-	</div>
-	<br>
-	<div class="form-example">
-		<h4>
-			<strong>Merenda : 
-		</h4>
-		</label> <br>
-		<%
-			while (rs2.next()) {
-			double qta = rs2.getDouble("quantita");
-
-			if (rs2.getString("pasto").equalsIgnoreCase("Merenda")) {
-				out.println(rs2.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
-				+ rs2.getDouble("carboidrati") * qta + "    Grassi:" + rs2.getDouble("grassi") * qta + "    Proteine:"
-				+ rs2.getDouble("proteine") * qta + "    Kcal:" + rs2.getInt("kcal") * qta);
-		%>
+		</div>
 		<br>
-		<%
+		<div class="form-example">
+			<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
+				alimento</a>
+		</div>
+		<br>
+		<div class="form-example">
+			<h4>
+				<strong>Merenda</strong> :
+			</h4>
+			<br>
+			<%
+				while (rs2.next()) {
+				double qta = rs2.getDouble("quantita");
+
+				if (rs2.getString("pasto").equalsIgnoreCase("Merenda")) {
+					out.println(rs2.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+					+ df.format(rs2.getDouble("carboidrati") * qta) + "    Grassi:"
+					+ df.format(rs2.getDouble("grassi") * qta) + "    Proteine:"
+					+ df.format(rs2.getDouble("proteine") * qta) + "    Kcal:" + df.format(rs2.getInt("kcal") * qta));
+			%>
+			<br>
+			<%
+				}
 			}
-		}
-		rs2.close();
-		%>
+			rs2.close();
+			%>
 
-	</div>
-	<br>
-	<div class="form">
-		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
-			alimento</a>
-	</div>
-	<br>
-	<div class="form">
-		<h4>
-			<strong>Pranzo :</strong>
-		</h4>
+		</div>
 		<br>
-		<%
-			while (rs3.next()) {
-			double qta = rs3.getDouble("quantita");
+		<div class="form">
+			<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
+				alimento</a>
+		</div>
+		<br>
+		<div class="form">
+			<h4>
+				<strong>Pranzo :</strong>
+			</h4>
+			<br>
+			<%
+				while (rs3.next()) {
+				double qta = rs3.getDouble("quantita");
 
-			if (rs3.getString("pasto").equalsIgnoreCase("Pranzo")) {
-				out.println(rs3.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
-				+ rs3.getDouble("carboidrati") * qta + "    Grassi:" + rs3.getDouble("grassi") * qta + "    Proteine:"
-				+ rs3.getDouble("proteine") * qta + "    Kcal:" + rs3.getInt("kcal") * qta);
-		%>
-		<br>
-		<%
+				if (rs3.getString("pasto").equalsIgnoreCase("Pranzo")) {
+					out.println(rs3.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+					+ df.format(rs3.getDouble("carboidrati") * qta) + "    Grassi:"
+					+ df.format(rs3.getDouble("grassi") * qta) + "    Proteine:"
+					+ df.format(rs3.getDouble("proteine") * qta) + "    Kcal:" + df.format(rs3.getInt("kcal") * qta));
+			%>
+			<br>
+			<%
+				}
 			}
-		}
-		rs3.close();
-		%>
+			rs3.close();
+			%>
 
-	</div>
-	<br>
-	<div class="form">
-		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
-			alimento</a>
-	</div>
-	<br>
-	<div class="form">
-		<h4>
-			<strong>Spuntino :</strong>
-		</h4>
+		</div>
 		<br>
-		<%
-			while (rs4.next()) {
-			double qta = rs4.getDouble("quantita");
+		<div class="form">
+			<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
+				alimento</a>
+		</div>
+		<br>
+		<div class="form">
+			<h4>
+				<strong>Spuntino :</strong>
+			</h4>
+			<br>
+			<%
+				while (rs4.next()) {
+				double qta = rs4.getDouble("quantita");
 
-			if (rs4.getString("pasto").equalsIgnoreCase("Spuntino")) {
-				out.println(rs4.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
-				+ rs4.getDouble("carboidrati") * qta + "    Grassi:" + rs4.getDouble("grassi") * qta + "    Proteine:"
-				+ rs4.getDouble("proteine") * qta + "    Kcal:" + rs4.getInt("kcal") * qta);
-		%>
-		<br>
-		<%
+				if (rs4.getString("pasto").equalsIgnoreCase("Spuntino")) {
+					out.println(rs4.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+					+ df.format(rs4.getDouble("carboidrati") * qta) + "    Grassi:"
+					+ df.format(rs4.getDouble("grassi") * qta) + "    Proteine:"
+					+ df.format(rs4.getDouble("proteine") * qta) + "    Kcal:" + df.format(rs4.getInt("kcal") * qta));
+			%>
+			<br>
+			<%
+				}
 			}
-		}
-		rs4.close();
-		%>
-	</div>
-	<br>
-	<div class="form">
-		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
-			alimento</a>
-	</div>
-	<br>
-	<div class="form">
-		<h4>
-			<strong>Cena :</strong>
-		</h4>
+			rs4.close();
+			%>
+		</div>
 		<br>
-		<%
-			while (rs5.next()) {
-			double qta = rs5.getDouble("quantita");
+		<div class="form">
+			<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
+				alimento</a>
+		</div>
+		<br>
+		<div class="form">
+			<h4>
+				<strong>Cena :</strong>
+			</h4>
+			<br>
+			<%
+				while (rs5.next()) {
+				double qta = rs5.getDouble("quantita");
 
-			if (rs5.getString("pasto").equalsIgnoreCase("Cena")) {
-				out.println(rs5.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
-				+ rs5.getDouble("carboidrati") * qta + "    Grassi:" + rs5.getDouble("grassi") * qta + "    Proteine:"
-				+ rs5.getDouble("proteine") * qta + "    Kcal:" + rs5.getInt("kcal") * qta);
-		%>
-		<br>
-		<%
+				if (rs5.getString("pasto").equalsIgnoreCase("Cena")) {
+					out.println(rs5.getString("nome") + "    Qtà(grammi):" + qta * 100 + "    Carboidrati:"
+					+ df.format(rs5.getDouble("carboidrati") * qta) + "    Grassi:"
+					+ df.format(rs5.getDouble("grassi") * qta) + "    Proteine:"
+					+ df.format(rs5.getDouble("proteine") * qta) + "    Kcal:" + df.format(rs5.getInt("kcal") * qta));
+			%>
+			<br>
+			<%
+				}
 			}
+			rs5.close();
+			%>
+
+		</div>
+		<br>
+		<div class="form">
+			<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
+				alimento</a>
+		</div>
+		<br> <br>
+		<%
+			ArrayList<AlimentiRegistrati> toSum = new ArrayList<AlimentiRegistrati>();
+
+		while (rs6.next()) {
+			AlimentiRegistrati alimento = new AlimentiRegistrati();
+			double qta = rs6.getDouble("quantita");
+			alimento.setCarboidrati(rs6.getDouble("carboidrati") * qta);
+			alimento.setGrassi(rs6.getDouble("grassi") * qta);
+			alimento.setProteine(rs6.getDouble("proteine") * qta);
+			alimento.setKcal((int) Math.round(rs6.getInt("kcal") * qta));
+
+			toSum.add(alimento);
 		}
-		rs5.close();
+		rs6.close();
+
+		int cho = 0;
+		int fat = 0;
+		int pro = 0;
+		int cal = 0;
+
+		for (AlimentiRegistrati alim : toSum) {
+
+			cho += (int) Math.round(alim.getCarboidrati());
+			fat += (int) Math.round(alim.getGrassi());
+			pro += (int) Math.round(alim.getProteine());
+			cal += (int) Math.round(alim.getKcal());
+		}
+		toSum.clear();
 		%>
-
+		<div class="totale">
+			<fieldset>
+				<legend>Tabella riassuntiva</legend>
+				<strong>
+					<%
+						out.println("carboidrati: " + cho + "  grassi: " + fat + "  proteine: " + pro + "  kcal: " + cal);
+					%>
+				</strong>
+			</fieldset>
+		</div>
+		<br> <br>
 	</div>
-	<br>
-	<div class="form">
-		<a href=http://localhost:8080/MyKcalCounter/InserimentoAlimenti.jsp>Inserisci
-			alimento</a>
-	</div>
-	<br>
-	<br>
-	<%
-		AlimentiRegistrati alimento = new AlimentiRegistrati();
-	ArrayList<AlimentiRegistrati> toSum = new ArrayList<AlimentiRegistrati>();
-
-	while (rs6.next()) {
-		double qta = rs6.getDouble("quantita");
-		alimento.setCarboidrati(rs6.getDouble("carboidrati") * qta);
-		alimento.setGrassi(rs6.getDouble("grassi") * qta);
-		alimento.setProteine(rs6.getDouble("proteine") * qta);
-		alimento.setKcal((int) Math.round(rs6.getInt("kcal") * qta));
-
-		toSum.add(alimento);
-	}
-	rs6.close();
-
-	int cho = 0;
-	int fat = 0;
-	int pro = 0;
-	int cal = 0;
-
-	for (AlimentiRegistrati alim : toSum) {
-		cho += (int) Math.round(alim.getCarboidrati());
-		fat += (int) Math.round(alim.getGrassi());
-		pro += (int) Math.round(alim.getProteine());
-		cal += (int) Math.round(alim.getKcal());
-	}
-%>
-	<div class="totale">
-		<%out.println("carboidrati: " + cho + "  grassi: " + fat + "  proteine: " + pro + "  kcal: " + cal);
-	%>
-	</div>
-	<br>
-	<br>
 
 	<div class=form></div>
 	<div class="footer">

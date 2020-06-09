@@ -100,5 +100,25 @@ public class ConnettiDB {
 			cn.close(); //chiudo connessione
 		}
 	}
-
+	
+	//metodo per l'update dell'account (UPDATE ACCOUNT)
+	public void aggiornaAccount(String newUser, String newPass, double newPesoAtt, double newObiettivo, String newSesso, int newAltezza, String newNazionalita, String user) throws SQLException {
+	
+		Statement st = null;
+		Connection cn = this.connessione();
+		
+		//creo statement ed eseguo INSERT
+				try {
+					st = cn.createStatement();
+					st.executeUpdate("UPDATE nutrizione.utenti SET USERNAME = '"+newUser+"', PASSWORD = '"+newPass+"', PESO_ATTUALE = '"+newPesoAtt+"', "+
+	    		 "OBIETTIVO = '"+newObiettivo+"', SESSO = '"+newSesso+"', ALTEZZA = '"+newAltezza+"', NAZIONALITA = '"+newNazionalita+"' WHERE (USERNAME = '"+user+"');");
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+				finally {
+					cn.close(); //chiudo connessione
+				}
+	
+	}
 }

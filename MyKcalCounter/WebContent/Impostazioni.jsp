@@ -18,7 +18,7 @@ rel="stylesheet" type="text/css">
 	<div class="header">
 		<div class="header1">
 			<div class="logo">
-				<a href="Login.jsp"><img src="images/logo1.png" alt="logo-1"></a>
+				<a href="homepage.html"><img src="images/logo1.png" alt="logo-1"></a>
 			</div>
 		</div>
 
@@ -41,9 +41,9 @@ rel="stylesheet" type="text/css">
 								</a></li>
 							</ul></li>
 					</ul> <!-- * -->
-				<li><a href="#">Diario</a> <!-- * -->
+				<li><a href="http://localhost:8080/MyKcalCounter/Diario.jsp">Diario</a> <!-- * -->
 				<li><a href="#">grafici</a> <!-- * -->
-				<li><a href="#">Impostazioni</a> <!-- * -->
+				<li><a href="http://localhost:8080/MyKcalCounter/Impostazioni.jsp">Impostazioni</a> <!-- * -->
 				<li class="flyout"><a href="#">Help</a>
 					<ul class="flyout-content nav stacked">
 						<li><a href="#">Come Registrarsi</a></li>
@@ -56,25 +56,10 @@ rel="stylesheet" type="text/css">
 		</div>
 	</div>
 	
-	<!-- connessione con il DB -->
-	<%
-	// carica il file di classe del driver 
-	Class.forName("com.mysql.cj.jdbc.Driver");
 
-	// apre la connessione con il database "nutrizione"
-	Connection dbconn = DriverManager
-			.getConnection("jdbc:mysql://localhost:3306/nutrizione?user=root&password=Alessio97&serverTimezone=UTC");
-
-	// creo uno statement
-	Statement statement = dbconn.createStatement();
-
-	//imposto i parametri user
-    String user = (String) session.getAttribute("user");
-	%>
-   
 <div class="wrapper">
 		<div class="title"></div>
-		<form class="form">
+		<form class="form" action="ImpostazioniServlet" method=post>
 			
 			<fieldset>
 				<legend>Modifica Account</legend>
@@ -123,23 +108,7 @@ rel="stylesheet" type="text/css">
 			<br>
 			<button class="submit entry" onclick="thanks()">Invia modifiche</button>
 			<br><br><br>
-			<div class="shadow"></div>
-			 <% 
-			 
-			 String newUser = request.getParameter("newUsnm");
-			 String newPass = request.getParameter("newPssw");
-			 Double newPesoAtt = Double.parseDouble(request.getParameter("newPesoAtt"));
-			 Double newObiettivo = Double.parseDouble(request.getParameter("newObiettivo"));
-			 int newAltezza = Integer.parseInt(request.getParameter("newAltezza"));
-			 String newSesso = request.getParameter("newSesso");
-			 String newNazionalita = request.getParameter("newNazionalita");
-			 
-			 
-			 String query = "UPDATE nutrizione.utenti SET USERNAME = '"+newUser+"', PASSWORD = '"+newPass+"', PESO_ATTUALE = '"+newPesoAtt+"', "+
-    		 "OBIETTIVO = '"+newObiettivo+"', SESSO = '"+newSesso+"', ALTEZZA = '"+newAltezza+"', NAZIONALITA = '"+newNazionalita+"' WHERE (USERNAME = '"+session.getAttribute("user")+"');";
-              ResultSet rs = statement.executeQuery(query);
-    %>
-			
+			<div class="shadow"></div>	
 		</form>
 
 	</div>	

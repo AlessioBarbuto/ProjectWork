@@ -8,17 +8,17 @@
 <link href="CSS/style1.css"
 rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="CSS/menu.css">
-<link rel="stylesheet" type="text/css" href="CSS/all.min.css">
+<!--  <link rel="stylesheet" type="text/css" href="CSS/all.min.css">
 <link rel="stylesheet" href="CSS/owl.carousel.min.css">
 <link rel="stylesheet" href="CSS/owl.theme.default.min.css">
-<link rel="stylesheet" type="text/css" href="CSS/styles.css">
+<link rel="stylesheet" type="text/css" href="CSS/styles.css">-->
 </head>
 <body class="contactBody">
 	<div class="banner"></div>
 	<div class="header">
 		<div class="header1">
 			<div class="logo">
-				<a href="homepage.html"><img src="images/logo1.png" alt="logo-1"></a>
+				<a href="http://localhost:8080/MyKcalCounter/homepage.html"><img src="images/logo1.png" alt="logo-1"></a>
 			</div>
 		</div>
 

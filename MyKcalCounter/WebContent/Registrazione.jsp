@@ -73,7 +73,7 @@
 			<br> <br>
 			<fieldset>
 				<legend>Dati personali</legend>
-				<label for="pesoAtt">Peso attuale)(kg):</label> <input type="number"
+				<label for="pesoAtt">Peso attuale (kg):</label> <input type="number" step="0.01" min="40" max="120"
 					class="name entry " id="pesoAtt" name="pesoAtt"> <br>
 				<br> <label for="obiettivo">Obiettivo (kg):</label> <input
 					type="number" step="0.01" min="40" max="120" class="name entry "

@@ -59,9 +59,6 @@ public class InserimentoServlet extends HttpServlet {
 			//reindirizzo verso una nuova pagina
 			response.sendRedirect("Diario.jsp");
 			
-			//-------------------------------------------------------------------------------------------------------
-			//SELECT * FROM nutrizione.consumati LEFT JOIN nutrizione.alimenti ON consumati.alimento = alimenti.NOME WHERE giorno = 'yyyy/MM/dd' AND pasto = 'colazione' AND username = 'user'; 
-	        //--------------------------- x selezionare gli inseriti del giorno -------------------------------------
 	}
 
 }

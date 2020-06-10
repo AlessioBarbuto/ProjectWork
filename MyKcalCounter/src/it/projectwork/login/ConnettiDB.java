@@ -61,7 +61,7 @@ public class ConnettiDB {
 	}
 
 
-	//metodo per la creazione delle credenziali (REGISTRAZIONE)
+	//metodo per la creazione delle credenziali (REGISTRAZIONE UTENTE)
 	public void registraUtente(String username, String password, double pesoAttuale, double obiettivo, String sesso, int altezza, String nazionalita) throws SQLException {
 
 		Statement st = null;
@@ -81,7 +81,7 @@ public class ConnettiDB {
 		}
 	}
 
-	//metodo per l'inserimento degli alimenti (REGISTRAZIONE ALIMENTI)
+	//metodo per l'inserimento degli alimenti nel diario (REGISTRAZIONE ALIMENTI NEL DIARIO)
 	public void inserisciAlimento(LocalDateTime giorno, String alimento, double quantita, String pasto, String utente) throws SQLException {
 
 		Statement st = null;
@@ -101,7 +101,7 @@ public class ConnettiDB {
 		}
 	}
 	
-	//metodo per l'update dell'account (UPDATE ACCOUNT)
+	//metodo per l'update dell'account (MODIFICA DATI ACCOUNT)
 	public void aggiornaAccount(String newUser, String newPass, double newPesoAtt, double newObiettivo, String newSesso, int newAltezza, String newNazionalita, String user) throws SQLException {
 	
 		Statement st = null;
